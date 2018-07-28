@@ -1,0 +1,11 @@
+.capitalized {
+    text-transform: capitalize;
+}
+
+.small {
+    min-height: 1%;
+    min-width: 1%;
+    margin-top: 18px;
+    height: 35px;
+    width: 35px;
+}
