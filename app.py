@@ -1,7 +1,7 @@
-from flask import Flask, jsonify, request
+from flask import Flask, render_template, jsonify
 from flask_pymongo import PyMongo
 import pprint
-app = Flask(__name__, static_folder="frontend",)
+app = Flask(__name__, static_folder="./frontend", template_folder="./frontend")
 
 app.config["MONGO_DB"] = "libster"
 app.config["MONGO_URI"] = "mongodb://localhost:27017/libster"
@@ -9,9 +9,9 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def index():
-    return render
+    return render_template('index.html')
 
-@app.route("/getPrefixes", methods=['GET'])
+@app.route("/api/getPrefixes", methods=['GET'])
 def get_prefix_list():
     prefixes_sr = mongo.db.prefixes_sr  # kolekcija prefixes_sr
     prefixes = mongo.db.prefixes  # kolekcija prefixes
