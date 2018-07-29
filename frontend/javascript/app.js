@@ -6,11 +6,9 @@ app.run(function ($rootScope, Service) {
         $rootScope.availablePrefixes = response.data;
     });
 
-    var choice = {"name": "asdf"};
-    var choiceSet = [];
+    $rootScope.entries = {}; // predstavlja model koji sadrzi vrednost selektovanog prefiksa, parametar i selektovani logicki operator (skup ove 3 vrednosti smatram pod entry-jem)
+    $rootScope.presentEntries = 2; // sadrzi podatak o tome koliko je entry-ja trenutno prisutno na ekranu
 
-    choiceSet.push(choice.name);
-    choice.name = "Stefan";
 
-    alert(choiceSet[0]);
+    $rootScope.tempEntry = {}; // predstavlja model za entry koji korisnik dodaje
 });

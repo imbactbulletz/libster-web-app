@@ -60,7 +60,7 @@
             <div layout="row" layout-align="center">
                 <md-input-container flex="30">
                     <label>Prefiksi</label>
-                    <md-select name="favoriteColor" ng-model="favoriteColor">
+                    <md-select ng-model="$root.tempEntry.prefix">
                         <md-optgroup label="Prefiksi">
                             <!-- Ukoliko postoji vrednost od prefiksa, ona se prikazuje, u suprotnom ime prefiksa se prikazuje. -->
                             <md-option ng-repeat="(name,value) in availablePrefixes" ng-if="value"
@@ -72,22 +72,20 @@
 
                 <md-input-container>
                     <label>Parametar</label>
-                    <input>
+                    <input ng-model="$root.tempEntry.parameter">
                 </md-input-container>
 
                 <md-input-container>
-                    <label>Operator</label>
-                    <md-select ng-model="asdf">
-                        <md-option><em>AND</em></md-option>
-                        <md-option><em>OR</em></md-option>
+                    <md-select ng-model="$root.tempEntry.operator" placeholder="Operatori">
+                        <md-optgroup label="Operatori">
+                            <md-option value="AND">AND</md-option>
+                            <md-option value="OR">OR</md-option>
                     </md-select>
-
                 </md-input-container>
-
             </div>
 
             <div layout="row" layout-align="center">
-                <md-button class="md-raised md-primary capitalized">Dodaj</md-button>
+                <md-button class="md-raised md-primary capitalized" ng-click="addEntry()">Dodaj</md-button>
             </div>
         </md-card-content>
     </md-card>
