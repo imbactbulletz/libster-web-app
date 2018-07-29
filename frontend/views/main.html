@@ -13,9 +13,11 @@
                     <label>Prefiksi</label>
                     <md-select name="favoriteColor" ng-model="favoriteColor">
                         <md-optgroup label="Prefiksi">
-                        <md-option value="red">Prefiks 1</md-option>
-                        <md-option value="blue">Prefiks 2</md-option>
-                        <md-option value="green">Prefiks 3</md-option>
+                            <!-- Ukoliko postoji vrednost od prefiksa, ona se prikazuje, u suprotnom ime prefiksa se prikazuje. -->
+                            <md-option ng-repeat="(name,value) in availablePrefixes" ng-if="value"
+                                       ng-value="name">{{ value }}</md-option>
+                            <md-option ng-repeat="(name,value) in availablePrefixes" ng-if="!value"
+                                       ng-value="name">{{ name }}</md-option>
                     </md-select>
                 </md-input-container>
 
@@ -26,7 +28,7 @@
 
                 <md-input-container>
                     <label>Operator</label>
-                    <md-select ng-model="">
+                    <md-select ng-model="asdf">
                         <md-option><em>AND</em></md-option>
                         <md-option><em>OR</em></md-option>
                     </md-select>
@@ -60,11 +62,28 @@
                     <label>Prefiksi</label>
                     <md-select name="favoriteColor" ng-model="favoriteColor">
                         <md-optgroup label="Prefiksi">
-                        <md-option value="red">Prefiks 1</md-option>
-                        <md-option value="blue">Prefiks 2</md-option>
-                        <md-option value="green">Prefiks 3</md-option>
+                            <!-- Ukoliko postoji vrednost od prefiksa, ona se prikazuje, u suprotnom ime prefiksa se prikazuje. -->
+                            <md-option ng-repeat="(name,value) in availablePrefixes" ng-if="value"
+                                       ng-value="name">{{ value }}</md-option>
+                            <md-option ng-repeat="(name,value) in availablePrefixes" ng-if="!value"
+                                       ng-value="name">{{ name }}</md-option>
                     </md-select>
                 </md-input-container>
+
+                <md-input-container>
+                    <label>Parametar</label>
+                    <input>
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Operator</label>
+                    <md-select ng-model="asdf">
+                        <md-option><em>AND</em></md-option>
+                        <md-option><em>OR</em></md-option>
+                    </md-select>
+
+                </md-input-container>
+
             </div>
 
             <div layout="row" layout-align="center">

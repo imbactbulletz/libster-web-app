@@ -1,7 +1,8 @@
 from flask import Flask, render_template, jsonify
 from flask_pymongo import PyMongo
-import pprint
+
 app = Flask(__name__, static_folder="./frontend", template_folder="./frontend")
+
 
 app.config["MONGO_DB"] = "libster"
 app.config["MONGO_URI"] = "mongodb://localhost:27017/libster"

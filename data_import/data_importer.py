@@ -26,7 +26,7 @@ file_err = open(path_log_err, "w")
 
 file = open(path_knjige, "r")
 for line in file:
-    print("line:", line)
+    #  print("line:", line)
     fields = line.split(row_separator, len(line))  # splitting line into fields
     post_data = dict()  # a dictionary that holds the content of a document
 
@@ -77,7 +77,7 @@ for line in file:
         file_err.write("[" + datetime.datetime.now().ctime() + "]" + " Could not write: " + line)
 
 
-file = open(path_prefiksi_sr, "r")
+file = open(path_prefiksi_sr, encoding='unicode-escape', mode="r")  # encoding navodi kako su podaci u fajlu encode-ovani
 pattern = re.compile("^[A-Z][A-Z]=.*")  # regex that all prefixes should match
 for line in file:
     if pattern.match(line):
