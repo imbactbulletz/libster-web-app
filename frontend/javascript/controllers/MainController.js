@@ -3,7 +3,7 @@ var app = angular.module("libster-app");
 app.controller('MainController', ['$scope', 'Service', '$location', '$rootScope', function ($scope, Service, $location, $rootScope) {
 
     $scope.addEntry = function () {
-        $rootScope.presentEntries += 1; // uvecavamo broj prisutnih entry-ja na ekranu
+        $rootScope.presentEntries += 1; // globalni counter - cisto radi jedinstvenog naziva za html i scope elemente
 
         // dodaje entry
         $rootScope.entries[$rootScope.presentEntries] = {
@@ -15,9 +15,16 @@ app.controller('MainController', ['$scope', 'Service', '$location', '$rootScope'
 
     };
 
+
     $scope.removeEntry = function (key) {
 
         delete $rootScope.entries[key];
 
+    };
+
+    // salje upit ka backend-u
+    $scope.sendQuery = function () {
+
+        Service.sendQuery($rootScope.entries);
     }
 }]);

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from flask_pymongo import PyMongo
 
 app = Flask(__name__, static_folder="./frontend", template_folder="./frontend")
@@ -43,3 +43,13 @@ def get_prefix_list():
     # vracamo dict prefiksa koji sadrzi odgovarajuce labele prefiksa
     return jsonify(prefixes_dict)
 
+
+@app.route("/api/getBooks", methods=["GET"])
+def get_books():
+    print("START")
+    for key in request.args:
+        print(key)
+        print(request.args.getlist(key))
+    print("END")
+    # todo isparsirati
+    return jsonify("hi")
