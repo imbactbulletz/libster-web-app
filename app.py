@@ -1,5 +1,7 @@
 from flask import Flask, render_template, jsonify, request
 from flask_pymongo import PyMongo
+import ast
+from QueryBuilder import QueryBuilder
 
 app = Flask(__name__, static_folder="./frontend", template_folder="./frontend")
 
@@ -7,6 +9,7 @@ app = Flask(__name__, static_folder="./frontend", template_folder="./frontend")
 app.config["MONGO_DB"] = "libster"
 app.config["MONGO_URI"] = "mongodb://localhost:27017/libster"
 mongo = PyMongo(app)
+builder = QueryBuilder()
 
 @app.route("/")
 def index():
@@ -47,9 +50,37 @@ def get_prefix_list():
 @app.route("/api/getBooks", methods=["GET"])
 def get_books():
     print("START")
-    for key in request.args:
-        print(key)
-        print(request.args.getlist(key))
-    print("END")
-    # todo isparsirati
+    prefixes = mongo.db.prefixes
+    sentence = list()
+
+
+    for argument in request.args:
+        entry = list()
+
+        parameter_data_list = request.args.getlist(argument)
+        parameter_data = ast.literal_eval(parameter_data_list[0])
+
+        search_term = parameter_data["prefix"]
+        mapped_parameters_cursor = prefixes.find({"name": search_term}, {"value": 1, "_id": 0})
+        mapped_parameters_list = list()
+
+        for m_par in mapped_parameters_cursor:
+            m_par_val = m_par["value"]
+            m_par_dotified = m_par_val[:3] + '.' + m_par_val[3:]
+            mapped_parameters_list.append(m_par_dotified)
+
+        entry.append(mapped_parameters_list)
+        entry.append(parameter_data["parameter"])
+
+        sentence.append(entry)
+
+        if "operator" in parameter_data:
+            sentence.append(parameter_data["operator"])
+
+
+
+    query = builder.build_from(sentence)
+
+    print(query)
+
     return jsonify("hi")
