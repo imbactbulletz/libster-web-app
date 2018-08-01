@@ -42,15 +42,19 @@ def get_prefix_list():
             prefixes_dict[prefix] = prefixes_sr_dict[prefix]
 
 
+    prefixes_list = []
 
+    for prefix in prefixes_dict:
+        prefixes_list.append({'name': prefix, "value": prefixes_dict[prefix]})
     # vracamo dict prefiksa koji sadrzi odgovarajuce labele prefiksa
-    return jsonify(prefixes_dict)
+    return jsonify({"prefixes": prefixes_list})
 
 
 @app.route("/api/getBooks", methods=["GET"])
 def get_books():
     print("START")
     prefixes = mongo.db.prefixes
+    books = mongo.db.books
     sentence = list()
 
 
@@ -81,6 +85,16 @@ def get_books():
 
     query = builder.build_from(sentence)
 
-    print(query)
 
-    return jsonify("hi")
+    books_cursor = books.find(query, {"_id": 0})
+
+    output = list()
+    for book in books_cursor:
+        print(book)
+        output.append(book)
+
+    print("Ukupno pronadjeno:", books_cursor.count())
+
+    print("END")
+
+    return jsonify(output)

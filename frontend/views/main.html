@@ -15,10 +15,10 @@
                     <md-select  ng-model="$root.entries[key].prefix">
                         <md-optgroup label="Prefiksi">
                             <!-- Ukoliko postoji vrednost od prefiksa, ona se prikazuje, u suprotnom ime prefiksa se prikazuje. -->
-                            <md-option ng-repeat="(name,value) in availablePrefixes" ng-if="value"
-                                       ng-value="name">{{ value }}</md-option>
-                            <md-option ng-repeat="(name,value) in availablePrefixes" ng-if="!value"
-                                       ng-value="name">{{ name }}</md-option>
+                            <md-option ng-repeat="prefix in availablePrefixes" ng-if="prefix.value"
+                                       ng-value="prefix.name">{{ prefix.value }}</md-option>
+                            <md-option ng-repeat="prefix in availablePrefixes" ng-if="!prefix.value"
+                                       ng-value="prefix.name">{{ prefix.name }}</md-option>
                     </md-select>
                 </md-input-container>
 

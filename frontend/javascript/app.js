@@ -10,7 +10,22 @@ app.run(function ($rootScope, Service) {
 
     // Zovemo servis koji vraca prefikse a zatim te prefikse smestamo u rootScope.
     Service.getPrefixes().then(function (response) {
-        $rootScope.availablePrefixes = response.data;
+        $rootScope.availablePrefixes = response.data["prefixes"];
+
+
+        // sortira prefikse leksikografski
+        $rootScope.availablePrefixes.sort(function (first, second) {
+
+            if (second["value"] > first["value"])
+                return -1;
+
+            if (second["value"] == first["value"])
+                return 0;
+
+            return 1;
+
+        });
     });
+
 
 });
