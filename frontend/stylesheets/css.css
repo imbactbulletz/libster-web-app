@@ -15,13 +15,19 @@
     width: 400px;
     max-height: 600px;
     max-width: 700px;
-    min-height: 400px;
-    min-width: 600px;
+    min-height: 200px;
+    min-width: 500px;
     overflow: auto;
     /*overflow-y: none;*/
-    background-color: #eeeeee;
+    background-color: #ffffff;
 }
 
-.md-dialog-content {
-  max-width: 300px;
+md-list{
+    min-width: 800px;
+    max-width: 800px;
+}
+
+md-list.make-scrollable {
+    height: 600px; //Or any other height you wish
+    overflow-y: scroll;
 }

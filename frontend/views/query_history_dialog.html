@@ -1,0 +1,29 @@
+<div>
+    <md-dialog aria-label="Istorija unosa">
+
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>Istorija unosa</h2>
+                </div>
+            </md-toolbar>
+
+           <md-dialog-content>
+                <md-list flex class="make-scrollable">
+                    <md-list-item ng-repeat="query in $root.queries_entered" class="md-2-line" ng-click="setEntries(query.value)">
+                        <div class="md-list-item-text">
+                            <h3>{{ query.name }}</h3>
+                            <p>{{ query.value }}</p>
+                        </div>
+                    </md-list-item>
+
+                </md-list>
+           </md-dialog-content>
+
+            <md-dialog-actions layout="row">
+                <span flex></span>
+                <md-button class="md-raised md-primary capitalized" ng-click="cancelDialog()">Zatvori</md-button>
+                <span flex></span>
+            </md-dialog-actions>
+
+    </md-dialog>
+</div>

@@ -4,9 +4,11 @@ app.run(function ($rootScope, Service) {
     $rootScope.entries = {1: {}, 2: {}}; // predstavlja model koji sadrzi vrednost selektovanog prefiksa, parametar i selektovani logicki operator (skup ove 3 vrednosti smatram pod entry-jem)
     $rootScope.presentEntries = 2; // sadrzi podatak o tome koliko je entry-ja trenutno prisutno na ekranu
     $rootScope.tableVisible = false;
-
     $rootScope.tempEntry = {}; // predstavlja model za entry koji korisnik dodaje
 
+
+    $rootScope.queries_entered = []; // smesta poslate query-je
+    $rootScope.queries_stored = 0; // brojac za entry u localStorage - sluzi da formiram naziv query-ja.
 
     // Zovemo servis koji vraca prefikse a zatim te prefikse smestamo u rootScope.
     Service.getPrefixes().then(function (response) {
