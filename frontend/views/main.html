@@ -12,7 +12,7 @@
 
                 <md-input-container flex="30">
                     <label>Prefiksi</label>
-                    <md-select  ng-model="$root.entries[key].prefix">
+                    <md-select ng-model="$root.entries[key].prefix">
                         <md-optgroup label="Prefiksi">
                             <!-- Ukoliko postoji vrednost od prefiksa, ona se prikazuje, u suprotnom ime prefiksa se prikazuje. -->
                             <md-option ng-repeat="prefix in availablePrefixes" ng-if="prefix.value"
@@ -42,7 +42,7 @@
             <div ng-repeat-end=""></div>
 
             <div layout="row" layout-align="center">
-                <md-button class="md-raised md-primary capitalized" ng-click="sendQuery()">Pretraži</md-button>
+                <md-button class="md-raised md-primary capitalized" ng-click="getBooks()">Pretraži</md-button>
                 <md-button class="md-primary capitalized">Istorija pretrage</md-button>
 
             </div>
@@ -64,10 +64,10 @@
                     <md-select ng-model="$root.tempEntry.prefix">
                         <md-optgroup label="Prefiksi">
                             <!-- Ukoliko postoji vrednost od prefiksa, ona se prikazuje, u suprotnom ime prefiksa se prikazuje. -->
-                            <md-option ng-repeat="(name,value) in availablePrefixes" ng-if="value"
-                                       ng-value="name">{{ value }}</md-option>
-                            <md-option ng-repeat="(name,value) in availablePrefixes" ng-if="!value"
-                                       ng-value="name">{{ name }}</md-option>
+                            <md-option ng-repeat="prefix in availablePrefixes" ng-if="prefix.value"
+                                       ng-value="prefix.name">{{ prefix.value }}</md-option>
+                            <md-option ng-repeat="prefix in availablePrefixes" ng-if="!prefix.value"
+                                       ng-value="prefix.name">{{ prefix.name }}</md-option>
                     </md-select>
                 </md-input-container>
 
@@ -91,4 +91,41 @@
         </md-card-content>
     </md-card>
 
+
+    <!-- Tabela sa rezultatima -->
+    <md-card ng-show="$root.tableVisible">
+        <md-card-title>
+            <span class="md-headline">Rezultati pretrage</span>
+        </md-card-title>
+
+        <md-card-content>
+            <div layout-align="center">
+                <md-data-table-container>
+                    <table md-data-table>
+                        <thead md-trim-column-names>
+                        <tr>
+                            <th>#</th>
+                            <th>Naslov</th>
+                            <th>Autor</th>
+                            <th>Izdavač</th>
+                            <th>Godina izdanja</th>
+                            <th>Mesto izdanja</th>
+                        </tr>
+                        </thead>
+                        <tbody ng-repeat="book in $root.books">
+                            <tr>
+                                <td>{{ $index + 1}}</td>
+                                <td>{{ book['200']['a'] }}</td>
+                                <td>{{ book['700']['a'] }} {{ book['700']['b'] }}</td>
+                                <td>{{ book['210']['c'] }}</td>
+                                <td>{{ book['210']['d'] }}</td>
+                                <td>{{ book['210']['c'] }}</td>
+                                <td><md-button class="md-raised md-primary capitalized" ng-click="showAdvanced($event, book)">Pun prikaz</md-button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </md-data-table-container>
+            </div>
+        </md-card-content>
+    </md-card>
 </div>

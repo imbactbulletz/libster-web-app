@@ -63,7 +63,7 @@ def get_books():
 
         parameter_data_list = request.args.getlist(argument)
         parameter_data = ast.literal_eval(parameter_data_list[0])
-
+        print(parameter_data)
         search_term = parameter_data["prefix"]
         mapped_parameters_cursor = prefixes.find({"name": search_term}, {"value": 1, "_id": 0})
         mapped_parameters_list = list()
@@ -81,7 +81,7 @@ def get_books():
         if "operator" in parameter_data:
             sentence.append(parameter_data["operator"])
 
-
+    print(sentence)
 
     query = builder.build_from(sentence)
 
@@ -98,3 +98,23 @@ def get_books():
     print("END")
 
     return jsonify(output)
+
+
+@app.route("/api/getMappedFields", methods=["GET"])
+def get_mapped_fields():
+    prefixes = mongo.db.prefixes
+
+    for argument in request.args:
+        parameter_data_list = request.args.getlist(argument)
+
+        search_term = parameter_data_list[0]
+
+        mapped_fields_cursor = prefixes.find({"name": search_term}, {"value": 1, "_id": 0})
+
+        output = []
+
+        for mapped_field in mapped_fields_cursor:
+            mapped_field_val = mapped_field["value"]
+            output.append({"field": mapped_field_val[:3], "subfield": mapped_field_val[3:]})
+
+        return jsonify(mapped_fields=output)

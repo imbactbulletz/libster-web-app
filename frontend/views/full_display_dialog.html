@@ -1,0 +1,25 @@
+<div>
+    <md-dialog aria-label="Pun prikaz">
+        <form ng-cloak>
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>Pun prikaz</h2>
+                </div>
+            </md-toolbar>
+
+            <md-dialog-content>
+                <div id="pre_text">
+                    <md-content>
+                   <pre>{{ $root.prettyfied_book }}</pre>
+                        </md-content>
+                </div>
+            </md-dialog-content>
+
+            <md-dialog-actions layout="row">
+                <span flex></span>
+                <md-button class="md-raised md-primary capitalized" ng-click="cancelDialog()">Zatvori</md-button>
+                <span flex></span>
+            </md-dialog-actions>
+        </form>
+    </md-dialog>
+</div>
